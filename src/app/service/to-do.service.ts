@@ -11,4 +11,12 @@ export class ToDoService {
   addToList(item: ToDo) {
     this.list.push(item);
   }
+
+  waitSeconds(): Promise<void> {
+    return new Promise<void>((res) => {
+      setTimeout(() => {
+        res();
+      }, 2000);
+    });
+  }
 }

@@ -1,12 +1,19 @@
-<input type="text" [(ngModel)]="input" />
-<button (click)="addToList()" class="add">Add</button>
-<div>
-  <div class="container" *ngIf="items[0]; else noItems">
-    <div *ngFor="let li of items" class="box">
-      <p *ngIf="!li.completed">
-        {{ li.title }} <button (click)="handleDone(li)" class="check">✓</button>
-      </p>
+<div *ngIf="this.await; else fetchingTasks">
+  <input type="text" [(ngModel)]="input" />
+  <button (click)="addToList()" class="add">Add</button>
+  <div>
+    <div class="container" *ngIf="items[0]; else noItems">
+      <div *ngFor="let li of items" class="box">
+        <p *ngIf="!li.completed">
+          {{ li.title }}
+          <button (click)="handleDone(li)" class="check">✓</button>
+        </p>
+      </div>
     </div>
+    <ng-template #noItems class="noitems"
+      >Oops! Non hai ancora aggiunto un To-do
+    </ng-template>
   </div>
-  <ng-template #noItems>Oops! Non hai ancora aggiunto un To-do</ng-template>
 </div>
+
+<ng-template #fetchingTasks> Fetching Tasks... </ng-template>

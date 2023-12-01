@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="this.await; else fetchingTasks">
   <div class="container">
     <div *ngIf="items[0]; else noItems">
       <div *ngFor="let item of items">
@@ -12,3 +12,4 @@
     >Oops! Non hai ancora aggiunto un To-do</ng-template
   >
 </div>
+<ng-template #fetchingTasks> Fetching Tasks... </ng-template>

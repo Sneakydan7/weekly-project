@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { waitForAsync } from '@angular/core/testing';
 import { ToDo } from 'src/app/models/to-do';
 import { ToDoService } from 'src/app/service/to-do.service';
 
@@ -10,6 +11,7 @@ import { ToDoService } from 'src/app/service/to-do.service';
 export class FirstPageComponent implements OnInit {
   input: string = '';
   counter: number = 0;
+  await: boolean = false;
   item: ToDo = {
     id: 1,
     title: '',
@@ -22,9 +24,13 @@ export class FirstPageComponent implements OnInit {
     this.items = this.srv.list;
   }
 
-  ngOnInit(): void {}
+  async ngOnInit() {
+    await this.srv.waitSeconds();
+    this.await = true;
+  }
 
-  addToList() {
+  async addToList() {
+    await this.srv.waitSeconds();
     this.item.title = this.input;
     this.item.id = this.item.id += this.counter;
     this.srv.addToList(this.item);
@@ -39,7 +45,8 @@ export class FirstPageComponent implements OnInit {
     this.item = { id: 1, title: '', completed: false };
   }
 
-  handleDone(li: ToDo) {
+  async handleDone(li: ToDo) {
+    await this.srv.waitSeconds();
     li.completed = !li.completed;
     console.log(li);
     console.log(this.items);

@@ -9,11 +9,15 @@ import { ToDoService } from 'src/app/service/to-do.service';
 })
 export class CompletedPageComponent implements OnInit {
   items: ToDo[] = [];
+
+  await: boolean = false;
+
   constructor(private srv: ToDoService) {
     this.items = srv.list;
   }
 
-  ngOnInit(): void {
-    console.log(this.items);
+  async ngOnInit() {
+    await this.srv.waitSeconds();
+    this.await = true;
   }
 }
