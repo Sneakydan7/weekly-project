@@ -1,0 +1,14 @@
+<div>
+  <div class="container">
+    <div *ngIf="items[0]; else noItems">
+      <div *ngFor="let item of items">
+        <div *ngIf="item.completed" class="completed">
+          {{ item.title }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noItems class="noitems"
+    >Oops! Non hai ancora aggiunto un To-do</ng-template
+  >
+</div>
